@@ -1,0 +1,90 @@
+.roomContainer {
+  border: 2px solid red;
+  height: 100vh;
+  padding: 4%;
+  width: 100vw;
+}
+
+.roomTitle {
+  display: flex;
+  justify-content: center;
+  height: 7vh;
+}
+
+.roomTools {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 15%;
+}
+
+.tools {
+  border: 2px solid;
+  width: 25%;
+  padding: 1%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.vertical-hr {
+  width: 0.1px;
+  height: 30px;
+  background-color: black;
+  border: none;
+  margin: 0 5px;
+  display: inline-block;
+}
+.selectColor {
+  display: flex;
+  width: 14%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+
+.buttons {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 33%;
+}
+
+.btnleft {
+  gap: 3%;
+  display: inline-flex;
+}
+
+.btnleft input,
+.btnright input {
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+.btnleft input {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  color: white;
+}
+
+.btnleft input:hover {
+  background: linear-gradient(45deg, #0056b3, #003c7a);
+}
+
+.btnright input {
+  background: linear-gradient(45deg, #ff0000, #cc0000);
+  color: white;
+}
+
+.btnright input:hover {
+  background: linear-gradient(45deg, #cc0000, #990000);
+}
