@@ -50,6 +50,7 @@
 .buttons {
   font-family: "Poppins", sans-serif;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px;
   width: 33%;
@@ -87,4 +88,13 @@
 
 .btnright input:hover {
   background: linear-gradient(45deg, #cc0000, #990000);
+}
+
+.whiteboardContainer {
+  height: 500px;
+  width: 83.3333%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
+  border: 1px solid black;
 }

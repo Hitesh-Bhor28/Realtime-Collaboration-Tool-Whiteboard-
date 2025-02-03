@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./RoomPage.css";
+import Whiteboard from "../../components/Whiteboard/Whiteboard";
 
 const RoomPage = () => {
   const [tool, setTool] = useState("pencil");
@@ -46,15 +47,13 @@ const RoomPage = () => {
           </div>
 
           <div className="selectColor">
-            <label htmlFor="color">Select Color:</label>
+            <label htmlFor="color">Select Color</label>
             <input
               type="color"
               name="currentColor"
               id="color"
               value={color}
-              onChange={(e) => {
-                e.target.value;
-              }}
+              onChange={(e) => setColor(e.target.value)}
             />
           </div>
           <div className="buttons">
@@ -67,11 +66,13 @@ const RoomPage = () => {
             </div>
           </div>
         </div>
+
+        <div className="whiteboardContainer">
+          <Whiteboard />
+        </div>
       </div>
     </>
   );
 };
 
 export default RoomPage;
-
-githubpushAAAAAAAAAAasasasa;
