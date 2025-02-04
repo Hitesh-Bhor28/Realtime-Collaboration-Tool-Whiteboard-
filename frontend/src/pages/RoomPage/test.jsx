@@ -10,6 +10,8 @@ const RoomPage = ({ user, socket, users = [] }) => {
   const [elements, setElements] = useState([]);
   const undoIntervalRef = useRef(null);
   const [openedUserTab, setOpenedUserTab] = useState(false);
+
+  // Keep track of users
   const [allUsers, setAllUsers] = useState(users);
 
   useEffect(() => {
@@ -21,24 +23,18 @@ const RoomPage = ({ user, socket, users = [] }) => {
   }, [socket]);
 
   useEffect(() => {
-    const handleUnload = () => {
-      if (socket) {
-        socket.emit("userLeft", user?.userId);
+    const resizeCanvas = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = window.innerWidth * 0.9; // 90% of screen width
+        canvas.height = window.innerHeight * 0.7; // 70% of screen height
       }
     };
 
-    window.addEventListener("beforeunload", handleUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleUnload);
-    };
-  }, [socket, user]);
-
-  const handleLogout = () => {
-    if (socket) {
-      socket.emit("userLeft", user?.userId);
-    }
-    window.location.href = "/"; // Redirect user to home or login page
-  };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    return () => window.removeEventListener("resize", resizeCanvas);
+  }, []);
 
   const handleCanvasClear = () => {
     const canvas = canvasRef.current;
@@ -92,19 +88,47 @@ const RoomPage = ({ user, socket, users = [] }) => {
     newCtx.drawImage(canvas, borderSize, borderSize);
 
     const link = document.createElement("a");
-    link.download = "whiteboard.png";
+    link.download = "whiteboard_with_border.png";
     link.href = newCanvas.toDataURL("image/png");
     link.click();
   };
 
+  // Logout function
+  const RoomPage = ({ user, socket, users }) => {
+    const handleLogout = () => {
+      if (socket) {
+        socket.emit("userLeft", user?.userId);
+      }
+      window.location.href = "/"; // Redirect to home or login page
+    };
+
+    useEffect(() => {
+      const handleUnload = () => {
+        if (socket) {
+          socket.emit("userLeft", user?.userId);
+        }
+      };
+
+      window.addEventListener("beforeunload", handleUnload);
+      return () => {
+        window.removeEventListener("beforeunload", handleUnload);
+      };
+    }, [socket, user]);
+
+    return (
+      <div className="roomContainer">
+        <button onClick={handleLogout} className="logoutButton">
+          Logout
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div className="roomContainer">
-      {/* Logout Button */}
       <button onClick={handleLogout} className="logoutButton">
         Logout
       </button>
-
-      {/* User List Button */}
       <button
         type="button"
         className="allUsersButton"
@@ -113,7 +137,6 @@ const RoomPage = ({ user, socket, users = [] }) => {
         Users
       </button>
 
-      {/* User List Popup */}
       {openedUserTab && (
         <div className="usersContainer">
           <button
@@ -128,7 +151,7 @@ const RoomPage = ({ user, socket, users = [] }) => {
               <>
                 {/* Show the presenter at the top */}
                 {allUsers
-                  .filter((usr) => usr.presenter)
+                  .filter((usr) => usr.presenter) // Find the presenter
                   .map((usr, index) => (
                     <p
                       key={`presenter-${index}`}
@@ -138,12 +161,12 @@ const RoomPage = ({ user, socket, users = [] }) => {
                     </p>
                   ))}
 
-                {/* Show other users */}
+                {/* Show the rest of the users */}
                 {allUsers
-                  .filter((usr) => !usr.presenter)
+                  .filter((usr) => !usr.presenter) // Show non-presenters
                   .map((usr, index) => (
                     <p key={`user-${index}`} className="userName">
-                      {usr.name} {user?.userId === usr.userId && "(You)"}
+                      {usr.name} {user && user.userId === usr.userId && "(You)"}
                     </p>
                   ))}
               </>
@@ -159,77 +182,6 @@ const RoomPage = ({ user, socket, users = [] }) => {
         <h1>[Users Online: {allUsers.length}]</h1>
       </div>
 
-      {user && user.presenter && (
-        <div className="roomTools">
-          <div className="tools">
-            <label htmlFor="pencil">Pencil</label>
-            <input
-              type="radio"
-              id="pencil"
-              name="currentTool"
-              value="pencil"
-              checked={tool === "pencil"}
-              onChange={(e) => setTool(e.target.value)}
-            />
-            <span className="vertical-hr"></span>
-            <label htmlFor="line">Line</label>
-            <input
-              type="radio"
-              id="line"
-              name="currentTool"
-              value="line"
-              checked={tool === "line"}
-              onChange={(e) => setTool(e.target.value)}
-            />
-            <span className="vertical-hr"></span>
-            <label htmlFor="rectangle">Rectangle</label>
-            <input
-              type="radio"
-              id="rectangle"
-              name="currentTool"
-              value="rectangle"
-              checked={tool === "rectangle"}
-              onChange={(e) => setTool(e.target.value)}
-            />
-          </div>
-
-          <div className="selectColor">
-            <label htmlFor="color">Select Color</label>
-            <input
-              type="color"
-              id="color"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
-            />
-          </div>
-
-          <div className="buttons">
-            <div className="btnleft">
-              <input
-                type="button"
-                value="Undo"
-                onMouseDown={handleStartUndo}
-                onMouseUp={handleStopUndo}
-                onMouseLeave={handleStopUndo}
-              />
-              <input
-                type="button"
-                value="Download Canvas"
-                onClick={handleDownload}
-              />
-            </div>
-            <div className="btnright">
-              <input
-                type="button"
-                value="Clear Canvas"
-                onClick={handleCanvasClear}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Whiteboard Component */}
       <div className="whiteboardContainer">
         <Whiteboard
           canvasRef={canvasRef}

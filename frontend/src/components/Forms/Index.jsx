@@ -3,12 +3,12 @@ import CreateRoomForm from "./CreateRoomForm/CreateRoomForm";
 import JoinRoomForm from "./JoinRoomForm/JoinRoomForm";
 import "./form.css";
 
-const Forms = () => {
+const Forms = ({ uuid, socket, setUser }) => {
   return (
     <>
-      <div class="center">
-        <CreateRoomForm />
-        <JoinRoomForm />
+      <div className="center">
+        <CreateRoomForm uuid={uuid} socket={socket} setUser={setUser} />
+        <JoinRoomForm uuid={uuid} socket={socket} setUser={setUser} />
       </div>
     </>
   );
