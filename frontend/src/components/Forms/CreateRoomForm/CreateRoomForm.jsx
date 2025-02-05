@@ -29,6 +29,7 @@ const CreateRoomForm = ({ uuid, socket, setUser }) => {
         <form action="#">
           <div className="data">
             <input
+              required
               type="text"
               placeholder="Enter your name"
               value={name}
@@ -58,7 +59,11 @@ const CreateRoomForm = ({ uuid, socket, setUser }) => {
           </div>
           <div className="btn">
             <div className="inner"></div>
-            <button type="submit" onClick={handleCreateRoom}>
+            <button
+              type="submit"
+              onClick={handleCreateRoom}
+              disabled={!name || !roomId}
+            >
               Generate Room
             </button>
           </div>

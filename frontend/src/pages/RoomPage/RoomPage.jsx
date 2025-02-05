@@ -161,15 +161,17 @@ const RoomPage = ({ user, socket, users = [] }) => {
       )}
 
       <div className="roomTitle">
-        <h1>White Board Sharing App</h1>
-        <h1>[Users Online: {allUsers.length}]</h1>
+        <h1>White Board Sharing App [Users Online: {allUsers.length}]</h1>
       </div>
 
       {user && user.presenter && (
         <div className="roomTools">
           <div className="tools">
-            <label htmlFor="pencil">Pencil</label>
+            <label htmlFor="pencil">
+              <span className="toolsHeadingPen toolsHeading">Pencil</span>
+            </label>
             <input
+              hidden
               type="radio"
               id="pencil"
               name="currentTool"
@@ -178,8 +180,11 @@ const RoomPage = ({ user, socket, users = [] }) => {
               onChange={(e) => setTool(e.target.value)}
             />
             <span className="vertical-hr"></span>
-            <label htmlFor="line">Line</label>
+            <label htmlFor="line">
+              <span className="toolsHeadingLin toolsHeading">Line</span>
+            </label>
             <input
+              hidden
               type="radio"
               id="line"
               name="currentTool"
@@ -188,8 +193,11 @@ const RoomPage = ({ user, socket, users = [] }) => {
               onChange={(e) => setTool(e.target.value)}
             />
             <span className="vertical-hr"></span>
-            <label htmlFor="rectangle">Rectangle</label>
+            <label htmlFor="rectangle">
+              <span className="toolsHeadingRec toolsHeading">Rectangle</span>
+            </label>
             <input
+              hidden
               type="radio"
               id="rectangle"
               name="currentTool"
@@ -200,13 +208,32 @@ const RoomPage = ({ user, socket, users = [] }) => {
           </div>
 
           <div className="selectColor">
-            <label htmlFor="color">Select Color</label>
+            <label
+              style={{
+                fontFamily: "'Comic Neue', cursive", // Use camelCase for properties
+                fontWeight: "bolder", // String value required
+                fontSize: "larger",
+              }}
+            >
+              Select Color
+            </label>
+
+            {/* Custom Color Picker */}
             <input
               type="color"
-              id="color"
               value={color}
               onChange={(e) => setColor(e.target.value)}
             />
+            {["violet", "red", "blue", "green"].map((colorOption) => (
+              <div
+                key={colorOption}
+                className={`colorOption ${
+                  color === colorOption ? "active" : ""
+                }`}
+                data-color={colorOption}
+                onClick={() => setColor(colorOption)}
+              ></div>
+            ))}
           </div>
 
           <div className="buttons">

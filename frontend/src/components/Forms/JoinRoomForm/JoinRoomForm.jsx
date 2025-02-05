@@ -36,6 +36,7 @@ const JoinRoomForm = ({ uuid, socket, setUser }) => {
               onChange={(e) => {
                 setName(e.target.value);
               }}
+              required="true"
             />
             <input
               type="text"
