@@ -13,6 +13,12 @@ const RoomPage = ({ user, socket, users = [] }) => {
   const [allUsers, setAllUsers] = useState(users);
 
   useEffect(() => {
+    return () => {
+      socket.emit("userLeftMSG", user);
+    };
+  }, []);
+
+  useEffect(() => {
     socket.on("allUsers", (updatedUsers) => {
       setAllUsers(updatedUsers || []);
     });

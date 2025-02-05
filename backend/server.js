@@ -38,6 +38,8 @@ io.on("connection", (socket) => {
     socket.emit("allUsers", users);
 
     // Broadcast updated user list to others in the room
+
+    socket.broadcast.to(roomId).emit("userJoinedMSG", name);
     socket.broadcast.to(roomId).emit("allUsers", users);
 
     // Send whiteboard data if available
@@ -58,6 +60,7 @@ io.on("connection", (socket) => {
     if (removedUser) {
       const users = getUsersInRoom(removedUser.roomId);
       io.to(removedUser.roomId).emit("allUsers", users);
+      socket.broadcast.to(roomIdGlobal).emit("userLeftMSG", removedUser.name);
     }
   });
 });
@@ -69,6 +72,7 @@ io.on("connection", (socket) => {
     if (removedUser) {
       const usersInRoom = getUsersInRoom(removedUser.roomId);
       io.to(removedUser.roomId).emit("allUsers", usersInRoom); // Update users list
+      socket.broadcast.to(roomIdGlobal).emit("userLeftMSG", removedUser.name);
     }
   });
 
@@ -78,6 +82,7 @@ io.on("connection", (socket) => {
     if (removedUser) {
       const usersInRoom = getUsersInRoom(removedUser.roomId);
       io.to(removedUser.roomId).emit("allUsers", usersInRoom);
+      socket.broadcast.to(roomIdGlobal).emit("userLeftMSG", removedUser.name);
     }
   });
 });

@@ -5,6 +5,8 @@ import RoomPage from "./pages/RoomPage/RoomPage";
 import { useEffect } from "react";
 import { useState } from "react";
 
+import { toast, ToastContainer } from "react-toastify";
+
 import io from "socket.io-client";
 
 const server = "http://localhost:5000";
@@ -36,6 +38,14 @@ const App = () => {
 
     socket.on("userIsJoined", handleUserJoined);
 
+    socket.on("userJoinedMSG", (data) => {
+      toast.success(`${data} is Joined the room`);
+    });
+
+    socket.on("userLeftMSG", (data) => {
+      toast.error(`${data} is Left the room`);
+    });
+
     return () => {
       socket.off("userIsJoined", handleUserJoined); // ✅ Cleanup listener on unmount
     };
@@ -63,6 +73,7 @@ const App = () => {
 
   return (
     <>
+      <ToastContainer />
       <Routes>
         <Route
           path="/"
