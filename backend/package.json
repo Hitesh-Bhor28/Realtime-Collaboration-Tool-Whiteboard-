@@ -14,5 +14,8 @@
     "express": "^4.21.2",
     "serverless-http": "^3.2.0",
     "socket.io": "^4.8.1"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
