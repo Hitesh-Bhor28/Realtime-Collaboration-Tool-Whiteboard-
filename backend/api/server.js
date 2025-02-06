@@ -1,10 +1,14 @@
 const express = require("express");
-const app = express();
 const { Server } = require("socket.io");
+const serverless = require("serverless-http");
 const { addUser, removeUser, getUsersInRoom } = require("./utils/users");
 
+const app = express();
 const PORT = process.env.PORT || 5000;
 
+let roomIdGlobal, imgURLGlobal;
+
+// Socket.io server setup
 const server = app.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);
 });
@@ -21,8 +25,6 @@ app.get("/", (req, res) => {
   res.send("This is the home page");
 });
 
-let roomIdGlobal, imgURLGlobal;
-
 // Socket.io connection handling
 io.on("connection", (socket) => {
   console.log("A user connected:", socket.id);
@@ -38,7 +40,6 @@ io.on("connection", (socket) => {
     socket.emit("allUsers", users);
 
     // Broadcast updated user list to others in the room
-
     socket.broadcast.to(roomId).emit("userJoinedMSG", name);
     socket.broadcast.to(roomId).emit("allUsers", users);
 
@@ -86,3 +87,6 @@ io.on("connection", (socket) => {
     }
   });
 });
+
+// Export the serverless function
+module.exports.handler = serverless(app);
