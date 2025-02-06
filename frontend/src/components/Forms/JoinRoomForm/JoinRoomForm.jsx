@@ -2,9 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useState } from "react";
-
 import "./join.css";
-
 const JoinRoomForm = ({ uuid, socket, setUser }) => {
   const [roomId, setRoomId] = useState("");
   const [name, setName] = useState("");

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Forms from "./components/Forms";
+import Forms from "./components/Forms/formPage";
 import RoomPage from "./pages/RoomPage/RoomPage";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -71,19 +71,19 @@ const App = () => {
     );
   };
 
-  // const PreventReload = () => {
-  //   useEffect(() => {
-  //     document.addEventListener("contextmenu", (event) => {
-  //       event.preventDefault();
-  //       console.log("");
-  //       toast.error("Right Click Disabled");
-  //     });
-  //   }, []);
-  // };
+  const PreventReload = () => {
+    useEffect(() => {
+      document.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        console.log("");
+        toast.error("Right Click Disabled");
+      });
+    }, []);
+  };
 
   return (
     <>
-      {/* <PreventReload /> */}
+      <PreventReload />
       <ToastContainer
         position="bottom-right"
         autoClose={1500}
