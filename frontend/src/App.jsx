@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import io from "socket.io-client";
 
-const server = process.env.REACT_APP_BACKEND_URL;
+const server = "https://realtime-collaboration-tool-whiteboard.onrender.com";
  
 const connectionOptions = {
   "force new connection": true,
