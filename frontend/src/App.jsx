@@ -9,7 +9,8 @@ import { toast, ToastContainer } from "react-toastify";
 
 import io from "socket.io-client";
 
-const server = "http://localhost:5000";
+const server = process.env.REACT_APP_BACKEND_URL;
+ 
 const connectionOptions = {
   "force new connection": true,
   reconnectionAttempts: "Infinity",
