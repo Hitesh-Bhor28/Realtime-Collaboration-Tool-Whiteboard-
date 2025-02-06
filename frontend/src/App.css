@@ -1,4 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
 * {
   margin: 0;
   padding: 0;
+}
+/* Prevents both vertical and horizontal scrollbars */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Prevents any scrollbars from appearing */
+}
+
+.homepage-title {
+  font-family: "Patrick Hand", serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 100px;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  margin-bottom: 20px;
+  padding-top: 5%;
+  position: absolute; /* Position it relative to the page */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  max-height: 100vh;
+  width: 100%; /* Take full width */
+  overflow: hidden; /* Hide any overflow */
+  z-index: 999; /* Ensure it's on top */
+}
+
+.homepage-end {
+  position: absolute;
+  bottom: 1.5%;
+  right: 6.5%;
+  font-family: "Pacifico", cursive;
+  font-size: 20px;
+  color: #ffffff;
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 30%);
+  text-align: center;
+  animation: fadeIn 2s ease-in-out, pulse 3s infinite;
+}
+
+/* Text glow effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle pulsing effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
 }

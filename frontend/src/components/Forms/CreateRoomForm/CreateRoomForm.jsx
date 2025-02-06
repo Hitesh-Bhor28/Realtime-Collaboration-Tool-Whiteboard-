@@ -2,9 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import "./create.css";
+
 const CreateRoomForm = ({ uuid, socket, setUser }) => {
   const [roomId, setRoomId] = useState(uuid());
   const [name, setName] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,6 +24,14 @@ const CreateRoomForm = ({ uuid, socket, setUser }) => {
     setUser(roomData);
     navigate(`/${roomId}`);
     socket.emit("userJoined", roomData);
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(roomId).then(() => {
+      setCopied(true); // Show copied state
+
+      setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 sec
+    });
   };
   return (
     <>
@@ -53,12 +64,11 @@ const CreateRoomForm = ({ uuid, socket, setUser }) => {
             >
               Generate
             </button>
-            <button className="copybtn" type="button">
-              copy
+            <button className="copybtn" type="button" onClick={handleCopy}>
+              {copied ? "Copied!" : "Copy"}
             </button>
           </div>
           <div className="btn">
-            <div className="inner"></div>
             <button
               type="submit"
               onClick={handleCreateRoom}

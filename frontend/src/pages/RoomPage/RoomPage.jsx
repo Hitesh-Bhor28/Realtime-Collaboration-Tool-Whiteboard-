@@ -140,7 +140,7 @@ const RoomPage = ({ user, socket, users = [] }) => {
                       key={`presenter-${index}`}
                       className="userName presenter"
                     >
-                      🎤 {usr.name} (Presenter)
+                      {usr.name} (Presenter)
                     </p>
                   ))}
 

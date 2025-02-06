@@ -1,0 +1,188 @@
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  gap: 5%;
+  flex-wrap: wrap;
+}
+
+body {
+  background: #f3f4f6; /* Light background */
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Sticky Note Container */
+.createContainer {
+  height: 45%;
+  margin-top: 10%;
+  width: 300px;
+  padding: 20px;
+  background: #fffd78; /* Sticky note color */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  transform: rotate(2deg); /* Slight rotation for a fun sticky note effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, scale 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.createContainer:hover {
+  transform: rotate(0deg) scale(1.05); /* Slightly larger on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Title Style */
+.animated-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3c3c3c;
+  background: linear-gradient(45deg, #28361b, #624038);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientSlide 6s infinite linear;
+}
+
+@keyframes gradientSlide {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Input fields styling */
+.data input {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.data input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Room Code Section */
+.code {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.generateCode {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  background: #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background: #000000;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #000000;
+  transform: scale(1.05);
+}
+
+/* Copy button styling */
+.copybtn {
+  background: #f39c12;
+}
+
+.copybtn:hover {
+  background: #e67e22;
+}
+
+/* Generate Button styling */
+.generatebtn {
+  background: #27ae60;
+}
+
+.generatebtn:hover {
+  background: #2ecc71;
+}
+
+/* Button Inner Effect */
+.btn {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* General button styles */
+.btn button {
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background: #000000;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* When the button is disabled (no text input) */
+.btn button:disabled {
+  background: #ccc; /* Grey when disabled */
+  cursor: not-allowed;
+  color: #7f7f7f; /* Light grey text */
+  transform: none; /* Disable transform (no hover effect when disabled) */
+}
+
+/* Hover effect for enabled button */
+.btn button:not(:disabled):hover {
+  background-color: #2c3e50; /* Darker shade of black */
+  transform: scale(1.05);
+}
+
+/* For buttons when they are enabled (text is typed in) */
+.btn button:not(:disabled) {
+  background-color: #000000; /* Black when enabled */
+}
+
+/* If text is typed in, the button color becomes black (default) */
+.btn button:enabled {
+  background-color: #000000; /* Black button color when text is available */
+}
+
+/* Optional: You can add a specific color change on hover, if needed */
+.btn button:enabled:hover {
+  background-color: #2c3e50; /* Darker black shade on hover */
+}

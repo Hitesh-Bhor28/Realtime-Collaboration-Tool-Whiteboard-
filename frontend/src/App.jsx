@@ -39,11 +39,11 @@ const App = () => {
     socket.on("userIsJoined", handleUserJoined);
 
     socket.on("userJoinedMSG", (data) => {
-      toast.success(`${data} is Joined the room`);
+      toast.success(`${data} - Joined the room`);
     });
 
     socket.on("userLeftMSG", (data) => {
-      toast.error(`${data} is Left the room`);
+      toast.error(`${data} - Left the room`);
     });
 
     return () => {
@@ -71,9 +71,35 @@ const App = () => {
     );
   };
 
+  // const PreventReload = () => {
+  //   useEffect(() => {
+  //     document.addEventListener("contextmenu", (event) => {
+  //       event.preventDefault();
+  //       console.log("");
+  //       toast.error("Right Click Disabled");
+  //     });
+  //   }, []);
+  // };
+
   return (
     <>
-      <ToastContainer />
+      {/* <PreventReload /> */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+      {/* Show Title Only on Home Page */}
+      {window.location.pathname === "/" && (
+        <h1 className="homepage-title">White Board Sharing App</h1>
+      )}
       <Routes>
         <Route
           path="/"
@@ -84,6 +110,7 @@ const App = () => {
           element={<RoomPage socket={socket} user={user} users={users} />}
         />
       </Routes>
+      <h1 className="homepage-end">❤️ hitesh..</h1>
     </>
   );
 };
