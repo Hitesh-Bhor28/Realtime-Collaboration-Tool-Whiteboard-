@@ -1,7 +1,7 @@
 # 🔗 Realtime Collaboration Tool  
 
  **🔹 COMPANY:** CODTECH IT SOLUTIONS  
- **🔹 NAME:** HITESH DNYANESHWAR BHOR 
+ **🔹 NAME:** HITESH DNYANESHWAR BHOR   
  **🔹 INTERN ID:** CT08OFU  
  **🔹 DOMAIN:** MERN STACK DEVELOPMENT  
  **🔹 DURATION:** 4 WEEKS  
