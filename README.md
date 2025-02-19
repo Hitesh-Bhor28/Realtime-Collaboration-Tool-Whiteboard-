@@ -1,7 +1,7 @@
 # 🔗 Realtime Collaboration Tool  
 
  **🔹 COMPANY:** CODTECH IT SOLUTIONS  
- **🔹 NAME:** HITESH BHOR  
+ **🔹 NAME:** HITESH DNYANESHWAR BHOR 
  **🔹 INTERN ID:** CT08OFU  
  **🔹 DOMAIN:** MERN STACK DEVELOPMENT  
  **🔹 DURATION:** 4 WEEKS  
@@ -91,3 +91,10 @@ This **enhances teamwork and creativity**, making it a perfect tool for brainsto
    cd backend
    npm run start
    
+---
+
+##📧 Contact Information
+💼 Hitesh Bhor
+📩 Email: [hiteshbhor28@gmail.com]
+🔗 GitHub: <a href="https://github.com/Hitesh-Bhor28" target="_blank" rel="noopener noreferrer">https://github.com/Hitesh-Bhor28</a>  
+🚀 LinkedIn: [https://www.linkedin.com/in/hitesh-bhor/]
