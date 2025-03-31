@@ -70,62 +70,57 @@ const Whiteboard = ({
     return { x, y };
   };
 
-  const handleMouseDown = (e) => {
-    const { x, y } = getRelativePosition(e);
+  const handleStart = (e) => {
+    e.preventDefault();
+    const event = e.touches ? e.touches[0] : e; // Support both touch and mouse
+    const { x, y } = getRelativePosition(event);
     setIsDrawing(true);
 
     if (tool === "pencil") {
-      setElements((prevElements) => [
-        ...prevElements,
+      setElements((prev) => [
+        ...prev,
         { type: "pencil", path: [[x, y]], stroke: color },
       ]);
     } else if (tool === "line") {
-      setElements((prevElements) => [
-        ...prevElements,
+      setElements((prev) => [
+        ...prev,
         { type: "line", x1: x, y1: y, x2: x, y2: y, stroke: color },
       ]);
     } else if (tool === "rectangle") {
-      setElements((prevElements) => [
-        ...prevElements,
+      setElements((prev) => [
+        ...prev,
         { type: "rectangle", x1: x, y1: y, x2: x, y2: y, stroke: color },
       ]);
     } else if (tool === "eraser") {
-      setElements((prevElements) => [
-        ...prevElements,
-        { type: "eraser", path: [[x, y]], stroke: "white" }, // Erase with white
+      setElements((prev) => [
+        ...prev,
+        { type: "eraser", path: [[x, y]], stroke: "white" },
       ]);
     }
   };
 
-  const handleMouseMove = (e) => {
+  const handleMove = (e) => {
     if (!isDrawing) return;
-    const { x, y } = getRelativePosition(e);
+    e.preventDefault();
+    const event = e.touches ? e.touches[0] : e;
+    const { x, y } = getRelativePosition(event);
 
-    setElements((prevElements) => {
-      const index = prevElements.length - 1;
-      const element = prevElements[index];
+    setElements((prev) => {
+      const index = prev.length - 1;
+      const element = prev[index];
 
-      if (element.type === "pencil") {
+      if (element.type === "pencil" || element.type === "eraser") {
         const newPath = [...element.path, [x, y]];
-        const updatedElement = { ...element, path: newPath };
-        return [...prevElements.slice(0, index), updatedElement];
-      } else if (element.type === "line") {
-        const updatedElement = { ...element, x2: x, y2: y };
-        return [...prevElements.slice(0, index), updatedElement];
-      } else if (element.type === "rectangle") {
-        const updatedElement = { ...element, x2: x, y2: y };
-        return [...prevElements.slice(0, index), updatedElement];
-      } else if (element.type === "eraser") {
-        const newPath = [...element.path, [x, y]];
-        const updatedElement = { ...element, path: newPath };
-        return [...prevElements.slice(0, index), updatedElement];
+        return [...prev.slice(0, index), { ...element, path: newPath }];
+      } else if (element.type === "line" || element.type === "rectangle") {
+        return [...prev.slice(0, index), { ...element, x2: x, y2: y }];
       }
 
-      return prevElements;
+      return prev;
     });
   };
 
-  const handleMouseUp = () => {
+  const handleEnd = () => {
     setIsDrawing(false);
   };
 
@@ -200,9 +195,12 @@ const Whiteboard = ({
   return (
     <canvas
       ref={canvasRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
+      onMouseDown={handleStart}
+      onMouseMove={handleMove}
+      onMouseUp={handleEnd}
+      onTouchStart={handleStart} // For touch support
+      onTouchMove={handleMove} // For touch support
+      onTouchEnd={handleEnd} // For touch support
       className="canvas"
     ></canvas>
   );
