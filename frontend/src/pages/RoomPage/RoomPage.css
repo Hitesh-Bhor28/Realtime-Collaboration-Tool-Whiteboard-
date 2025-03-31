@@ -244,6 +244,14 @@ canvas {
   background: bisque;
   transition: background-color 0.1s ease-in-out; /* Smooth transition */
 }
+
+.toolsHeadingErase {
+  padding: 4% 20% 4% 20%;
+  background: bisque;
+  transition: background-color 0.1s ease-in-out; /* Smooth transition */
+  margin-left: -30%;
+}
+
 .toolsHeadingLin {
   padding: 4% 26% 4% 26%;
   background: bisque;
@@ -253,11 +261,13 @@ canvas {
   padding: 4% 10% 4% 14%;
   background: bisque;
   transition: background-color 0.1s ease-in-out; /* Smooth transition */
+  margin-left: -20%;
 }
 
 .toolsHeading {
   top: 28%;
   color: #333;
+  background: bisque;
 }
 .toolsHeading:hover {
   background-color: #ffcc99; /* Light orange on hover */

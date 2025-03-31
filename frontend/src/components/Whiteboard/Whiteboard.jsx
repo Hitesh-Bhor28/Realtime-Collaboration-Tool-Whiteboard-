@@ -27,8 +27,8 @@ const Whiteboard = ({
           src={img}
           alt="images real time"
           style={{
-            height: "100%",
-            width: window.innerHeight * 1.5,
+            height: "49vh",
+            width: "81vw",
           }}
         />
       </div>
@@ -61,10 +61,12 @@ const Whiteboard = ({
   const getRelativePosition = (event) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const x = (event.clientX - rect.left) * scaleX;
-    const y = (event.clientY - rect.top) * scaleY;
+    const scaleX = rect.width / canvas.width; // FIX: Invert the scaling
+    const scaleY = rect.height / canvas.height;
+
+    const x = (event.clientX - rect.left) / scaleX; // FIX: Divide instead of multiply
+    const y = (event.clientY - rect.top) / scaleY;
+
     return { x, y };
   };
 
@@ -87,6 +89,11 @@ const Whiteboard = ({
         ...prevElements,
         { type: "rectangle", x1: x, y1: y, x2: x, y2: y, stroke: color },
       ]);
+    } else if (tool === "eraser") {
+      setElements((prevElements) => [
+        ...prevElements,
+        { type: "eraser", path: [[x, y]], stroke: "white" }, // Erase with white
+      ]);
     }
   };
 
@@ -108,7 +115,12 @@ const Whiteboard = ({
       } else if (element.type === "rectangle") {
         const updatedElement = { ...element, x2: x, y2: y };
         return [...prevElements.slice(0, index), updatedElement];
+      } else if (element.type === "eraser") {
+        const newPath = [...element.path, [x, y]];
+        const updatedElement = { ...element, path: newPath };
+        return [...prevElements.slice(0, index), updatedElement];
       }
+
       return prevElements;
     });
   };
@@ -126,9 +138,11 @@ const Whiteboard = ({
     const canvas = canvasRef.current;
     const ctx = ctxRef.current;
     ctx.lineCap = "round";
+
     if (canvasRef) {
       const roughCanvas = rough.canvas(canvas);
 
+      // Clear canvas before redrawing elements
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       elements.forEach((element) => {
@@ -166,8 +180,18 @@ const Whiteboard = ({
           );
           roughCanvas.draw(roughElement);
         }
+        // Eraser logic (draws in white)
+        else if (element.type === "eraser") {
+          const roughElement = roughGenerator.linearPath(element.path, {
+            stroke: "white", // Erases by drawing in white
+            strokeWidth: 10, // Make eraser strokes wider
+            roughness: 0,
+          });
+          roughCanvas.draw(roughElement);
+        }
       });
 
+      // Send updated canvas data to the server for real-time sync
       const canvasImage = canvasRef.current.toDataURL();
       socket.emit("WhiteboardData", canvasImage);
     }

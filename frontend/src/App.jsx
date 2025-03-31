@@ -10,7 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 import io from "socket.io-client";
 
 const server = "https://realtime-collaboration-tool-whiteboard.onrender.com";
- 
+
 const connectionOptions = {
   "force new connection": true,
   reconnectionAttempts: "Infinity",
@@ -72,19 +72,19 @@ const App = () => {
     );
   };
 
-  const PreventReload = () => {
-    useEffect(() => {
-      document.addEventListener("contextmenu", (event) => {
-        event.preventDefault();
-        console.log("");
-        toast.error("Right Click Disabled");
-      });
-    }, []);
-  };
+  // const PreventReload = () => {
+  //   useEffect(() => {
+  //     document.addEventListener("contextmenu", (event) => {
+  //       event.preventDefault();
+  //       console.log("");
+  //       toast.error("Right Click Disabled");
+  //     });
+  //   }, []);
+  // };
 
   return (
     <>
-      <PreventReload />
+      {/* <PreventReload /> */}
       <ToastContainer
         position="bottom-right"
         autoClose={1500}

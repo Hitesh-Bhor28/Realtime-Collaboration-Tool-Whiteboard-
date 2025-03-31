@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./RoomPage.css";
+import "./responsive.css";
 import Whiteboard from "../../components/Whiteboard/Whiteboard";
 
 const RoomPage = ({ user, socket, users = [] }) => {
@@ -180,6 +181,20 @@ const RoomPage = ({ user, socket, users = [] }) => {
               onChange={(e) => setTool(e.target.value)}
             />
             <span className="vertical-hr"></span>
+
+            <label htmlFor="eraser">
+              <span className="toolsHeadingErase toolsHeading">Eraser</span>
+            </label>
+            <input
+              hidden
+              type="radio"
+              id="eraser"
+              name="currentTool"
+              value="eraser"
+              checked={tool === "eraser"}
+              onChange={(e) => setTool(e.target.value)}
+            />
+
             <label htmlFor="line">
               <span className="toolsHeadingLin toolsHeading">Line</span>
             </label>

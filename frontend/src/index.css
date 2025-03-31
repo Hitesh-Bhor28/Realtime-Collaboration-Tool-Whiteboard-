@@ -4,3 +4,176 @@
   background-image: url("/back.jpg");
   background-size: cover;
 }
+
+/* Small devices (phones, 320px - 480px) */
+@media (max-width: 480px) {
+  .whiteboardContainer canvas img {
+    width: 73vw !important;
+    height: 48vh !important;
+  }
+
+  .homepage-title {
+    font-size: 14px;
+  }
+  .createContainer {
+    width: min(300px, 80%) !important;
+    height: 35% !important;
+    margin-top: 33px !important;
+  }
+  .generateCode {
+    font-size: 10px !important;
+    width: -webkit-fill-available;
+  }
+
+  .generatebtn,
+  .copybtn {
+    font-size: 9px !important;
+    width: -webkit-fill-available;
+    height: 27px;
+    padding-top: 7px;
+  }
+
+  .btn button {
+    position: relative;
+    top: -15px;
+    width: fit-content;
+    font-size: 5px !important;
+  }
+
+  .animated-title {
+    font-size: 15px !important;
+  }
+
+  .joinContainer {
+    margin-top: -7% !important;
+
+    width: min(300px, 80%) !important;
+  }
+
+  .data input {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 3px;
+  }
+  .code {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .pastebtn {
+    font-size: 9px !important;
+    height: 27px;
+    padding-top: 7px;
+  }
+
+  .ani {
+    display: none;
+  }
+
+  .homepage-end {
+    display: none;
+  }
+}
+
+/* Medium devices (Tablets, 481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .homepage-title {
+    font-size: 20px;
+  }
+  .createContainer {
+    width: min(300px, 80%) !important;
+    height: 35% !important;
+    margin-top: 33px !important;
+  }
+  .generateCode {
+    font-size: 10px !important;
+  }
+
+  .generatebtn,
+  .copybtn {
+    font-size: 9px !important;
+
+    height: 27px;
+    padding-top: 7px;
+  }
+
+  .btn button {
+    position: relative;
+    top: -25px;
+    font-size: 8px !important;
+  }
+
+  .animated-title {
+    font-size: 15px !important;
+  }
+
+  .joinContainer {
+    margin-top: -7% !important;
+
+    width: min(300px, 80%) !important;
+  }
+
+  .data input {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 3px;
+  }
+  .code {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .pastebtn {
+    font-size: 9px !important;
+    height: 27px;
+    padding-top: 7px;
+  }
+
+  .ani {
+    display: none;
+  }
+
+  .homepage-end {
+    bottom: 1.5%;
+    right: 0.5%;
+    font-size: 10px;
+  }
+}
+
+/* Large devices (Laptops, 769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .homepage-title {
+    font-size: 60px;
+  }
+
+  .ani {
+    display: none;
+  }
+
+  .homepage-end {
+    bottom: -0.5%;
+    right: 1.5%;
+    font-size: 18px;
+  }
+}
+
+/* Extra Large devices (Desktops, 1025px and above) */
+@media (min-width: 1025px) {
+  .homepage-title {
+    font-size: 80px;
+  }
+
+  .ani {
+    position: fixed;
+    left: 89%;
+    top: 97%;
+  }
+
+  .homepage-end {
+    bottom: 0.5%;
+    right: 2.5%;
+    font-size: 18px;
+  }
+}

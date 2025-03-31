@@ -1,0 +1,287 @@
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Small devices (phones, 320px - 480px) */
+@media (max-width: 480px) {
+  .whiteboardContainer canvas img {
+    width: 73vw !important;
+    height: 48vh !important;
+  }
+
+  .roomTitle h1 {
+    font-size: 14px;
+  }
+
+  .allUsersButton {
+    left: 5%;
+    top: 8%;
+  }
+
+  .allUsersButton,
+  .logoutButton {
+    top: 7%;
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+  .tools {
+    width: -webkit-fill-available;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15%;
+    margin-left: 1%;
+    padding: 4px;
+  }
+
+  .roomTools {
+    gap: 16%;
+    display: flex;
+    height: 48%;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  .toolsHeading {
+    font-size: 11px;
+  }
+
+  .selectColor {
+    width: -webkit-fill-available;
+    font-size: 10px;
+    margin-top: -10%;
+    padding: 4px;
+  }
+  .buttons {
+    width: -webkit-fill-available;
+    margin-top: -19%;
+  }
+
+  .btnleft,
+  .btnright {
+    width: 42%;
+    margin-left: 8%;
+    justify-content: center;
+  }
+
+  .btnleft input,
+  .btnright input {
+    padding: 3px 8px;
+    font-size: 7.5px;
+  }
+  .btnleft,
+  .btnright {
+    width: 42%;
+    margin-left: 8%;
+    justify-content: center;
+  }
+
+  .vertical-hr {
+    opacity: 0%;
+  }
+
+  .whiteboardContainer {
+    width: 95%;
+    height: 51vh;
+    margin-top: 1rem;
+  }
+}
+
+/* Medium devices (Tablets, 481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .roomTitle h1 {
+    font-size: 35px;
+  }
+
+  .allUsersButton {
+    left: 5%;
+    top: 8%;
+  }
+
+  .allUsersButton,
+  .logoutButton {
+    top: 9%;
+    padding: 13px 23px;
+    font-size: 12px;
+  }
+  .tools {
+    width: -webkit-fill-available;
+    justify-content: center;
+    gap: 5%;
+    margin-top: 5%;
+    margin-left: 0%;
+    padding: 7px;
+  }
+
+  .roomTools {
+    gap: 6%;
+    display: flex;
+    height: 43%;
+    width: 79%;
+  }
+
+  .toolsHeading {
+    font-size: 17px;
+  }
+
+  .selectColor {
+    width: -webkit-fill-available;
+    font-size: 10px;
+    margin-top: -10%;
+    padding: 4px;
+  }
+  .buttons {
+    width: -webkit-fill-available;
+    margin-top: -12%;
+  }
+
+  .btnleft,
+  .btnright {
+    width: 42%;
+    margin-left: 8%;
+    justify-content: center;
+  }
+
+  .btnleft input,
+  .btnright input {
+    padding: 13px 9px;
+    font-size: 7.5px;
+  }
+  .btnleft,
+  .btnright {
+    width: 42%;
+    margin-left: 8%;
+    justify-content: center;
+  }
+
+  .vertical-hr {
+    opacity: 0%;
+  }
+
+  .whiteboardContainer {
+    width: 95%;
+    height: 51vh;
+    margin-top: -2rem;
+  }
+}
+
+/* Large devices (Laptops, 769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .roomTitle h1 {
+    font-size: 29px;
+  }
+
+  .allUsersButton,
+  .logoutButton {
+    top: 12%;
+    padding: 9px 17px;
+    font-size: 15px;
+  }
+  .tools {
+    width: inherit;
+    justify-content: center;
+    gap: 7%;
+    margin-top: -6%;
+    margin-left: 0%;
+    padding: 7px;
+  }
+
+  .roomTools {
+    gap: 6%;
+    display: flex;
+    height: 43%;
+    width: 79%;
+  }
+
+  .toolsHeading {
+    font-size: 17px;
+  }
+
+  .selectColor {
+    width: inherit;
+    font-size: 17px;
+    margin-top: -13%;
+    padding: 7px;
+  }
+  .buttons {
+    width: inherit;
+    margin-top: -15%;
+  }
+
+  .btnleft,
+  .btnright {
+    width: 36%;
+    margin-left: 7%;
+    justify-content: center;
+  }
+
+  .btnleft input,
+  .btnright input {
+    padding: 8px 9px;
+    font-size: 13.5px;
+  }
+
+  .vertical-hr {
+    opacity: 0%;
+  }
+
+  .whiteboardContainer {
+    width: 95%;
+    height: 51vh;
+    margin-top: -2rem;
+  }
+}
+
+/* Extra Large devices (Desktops, 1025px and above) */
+@media (min-width: 1025px) {
+  .roomTitle h1 {
+    font-size: 33px;
+    margin-top: -6%;
+  }
+
+  .allUsersButton,
+  .logoutButton {
+    position: absolute;
+    top: 5%;
+    padding: 14px 22px;
+    font-size: 20px;
+  }
+  .roomTools {
+    height: 20%;
+    margin-top: 3%;
+  }
+  .selectColor {
+    display: flex;
+    width: 26%;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .tools {
+    gap: 6%;
+    width: 28%;
+    padding: 9px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .vertical-hr {
+    opacity: 0%;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    width: 28%;
+    justify-content: space-between;
+  }
+  .btnleft,
+  .btnright {
+    margin-top: 1%;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+}
