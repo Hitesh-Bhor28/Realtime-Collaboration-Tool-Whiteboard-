@@ -1,16 +1,5 @@
 # 🔗 Realtime Collaboration Tool  
 
- **🔹 COMPANY:** CODTECH IT SOLUTIONS  
- **🔹 NAME:** HITESH DNYANESHWAR BHOR   
- **🔹 INTERN ID:** CT08OFU  
- **🔹 DOMAIN:** MERN STACK DEVELOPMENT  
- **🔹 DURATION:** 4 WEEKS  
- **🔹 MENTOR:** NEELA SANTOSH  
-
----
-
-## 📌 **TASK DESCRIPTION**  
-
 Collaboration is crucial in today's digital world, where remote work and online teamwork have become the norm. This **Realtime Collaboration Tool** enables multiple users to work together in a shared online space, using interactive drawing tools. The platform is designed to support **real-time collaboration** with features such as **room creation, user management, and an interactive canvas** with essential drawing tools.  
 
 The project is built using the **MERN stack**, ensuring a **fast, scalable, and real-time** experience. **WebSockets (Socket.io)** enable instant updates, making collaboration seamless.  
