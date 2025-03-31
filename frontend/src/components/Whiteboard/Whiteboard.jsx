@@ -57,73 +57,63 @@ const Whiteboard = ({
     ctxRef.current = ctx;
   };
 
-  // Function to get mouse position relative to the canvas
   const getRelativePosition = (event) => {
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = rect.width / canvas.width; // FIX: Invert the scaling
-    const scaleY = rect.height / canvas.height;
+  const canvas = canvasRef.current;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
 
-    const x = (event.clientX - rect.left) / scaleX; // FIX: Divide instead of multiply
-    const y = (event.clientY - rect.top) / scaleY;
+  // Check if event is from touch
+  const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+  const clientY = event.touches ? event.touches[0].clientY : event.clientY;
 
-    return { x, y };
-  };
+  const x = (clientX - rect.left) * scaleX;
+  const y = (clientY - rect.top) * scaleY;
+  
+  return { x, y };
+};
 
-  const handleStart = (e) => {
-    e.preventDefault();
-    const event = e.touches ? e.touches[0] : e; // Support both touch and mouse
-    const { x, y } = getRelativePosition(event);
-    setIsDrawing(true);
+// Handle both mouse and touch events
+const handlePointerDown = (e) => {
+  e.preventDefault(); // Prevent scrolling on touch devices
+  const { x, y } = getRelativePosition(e);
+  setIsDrawing(true);
 
-    if (tool === "pencil") {
-      setElements((prev) => [
-        ...prev,
-        { type: "pencil", path: [[x, y]], stroke: color },
-      ]);
-    } else if (tool === "line") {
-      setElements((prev) => [
-        ...prev,
-        { type: "line", x1: x, y1: y, x2: x, y2: y, stroke: color },
-      ]);
-    } else if (tool === "rectangle") {
-      setElements((prev) => [
-        ...prev,
-        { type: "rectangle", x1: x, y1: y, x2: x, y2: y, stroke: color },
-      ]);
-    } else if (tool === "eraser") {
-      setElements((prev) => [
-        ...prev,
-        { type: "eraser", path: [[x, y]], stroke: "white" },
-      ]);
+  if (tool === "pencil") {
+    setElements((prev) => [...prev, { type: "pencil", path: [[x, y]], stroke: color }]);
+  } else if (tool === "line") {
+    setElements((prev) => [...prev, { type: "line", x1: x, y1: y, x2: x, y2: y, stroke: color }]);
+  } else if (tool === "rectangle") {
+    setElements((prev) => [...prev, { type: "rectangle", x1: x, y1: y, x2: x, y2: y, stroke: color }]);
+  } else if (tool === "eraser") {
+    setElements((prev) => [...prev, { type: "eraser", path: [[x, y]], stroke: "white" }]);
+  }
+};
+
+const handlePointerMove = (e) => {
+  if (!isDrawing) return;
+  e.preventDefault();
+  const { x, y } = getRelativePosition(e);
+
+  setElements((prev) => {
+    const index = prev.length - 1;
+    const element = prev[index];
+
+    if (element.type === "pencil" || element.type === "eraser") {
+      const updatedElement = { ...element, path: [...element.path, [x, y]] };
+      return [...prev.slice(0, index), updatedElement];
+    } else if (element.type === "line" || element.type === "rectangle") {
+      const updatedElement = { ...element, x2: x, y2: y };
+      return [...prev.slice(0, index), updatedElement];
     }
-  };
 
-  const handleMove = (e) => {
-    if (!isDrawing) return;
-    e.preventDefault();
-    const event = e.touches ? e.touches[0] : e;
-    const { x, y } = getRelativePosition(event);
+    return prev;
+  });
+};
 
-    setElements((prev) => {
-      const index = prev.length - 1;
-      const element = prev[index];
-
-      if (element.type === "pencil" || element.type === "eraser") {
-        const newPath = [...element.path, [x, y]];
-        return [...prev.slice(0, index), { ...element, path: newPath }];
-      } else if (element.type === "line" || element.type === "rectangle") {
-        return [...prev.slice(0, index), { ...element, x2: x, y2: y }];
-      }
-
-      return prev;
-    });
-  };
-
-  const handleEnd = () => {
-    setIsDrawing(false);
-  };
-
+const handlePointerUp = () => {
+  setIsDrawing(false);
+};
   useEffect(() => {
     setupCanvas();
   }, [canvasRef]);
@@ -193,16 +183,16 @@ const Whiteboard = ({
   }, [elements, canvasRef, ctxRef]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      onMouseDown={handleStart}
-      onMouseMove={handleMove}
-      onMouseUp={handleEnd}
-      onTouchStart={handleStart} // For touch support
-      onTouchMove={handleMove} // For touch support
-      onTouchEnd={handleEnd} // For touch support
-      className="canvas"
-    ></canvas>
+  <canvas
+    ref={canvasRef}
+    onMouseDown={handlePointerDown}
+    onMouseMove={handlePointerMove}
+    onMouseUp={handlePointerUp}
+    onTouchStart={handlePointerDown}
+    onTouchMove={handlePointerMove}
+    onTouchEnd={handlePointerUp}
+    className="canvas"
+  />
   );
 };
 
