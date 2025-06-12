@@ -111,7 +111,7 @@ const App = () => {
           element={<RoomPage socket={socket} user={user} users={users} />}
         />
       </Routes>
-      <h1 className="homepage-end">❤️ hitesh..</h1>
+      <h1 className="homepage-end">❤️ CREATED BY Hitesh,Tilak,Vedant,Dinesh..</h1>
     </>
   );
 };
