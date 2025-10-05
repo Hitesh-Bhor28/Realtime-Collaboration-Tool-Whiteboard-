@@ -1,5 +1,13 @@
 # 🔗 Realtime Collaboration Tool  
 
+## 🖼️ Project Images  
+
+### 🏠 Room Creation & Collaboration  
+![Room Creation](./assets/1.png)
+
+### 🎨 Realtime Drawing & Canvas Tools  
+![Realtime Drawing](./assets/2.png)
+
 Collaboration is crucial in today's digital world, where remote work and online teamwork have become the norm. This **Realtime Collaboration Tool** enables multiple users to work together in a shared online space, using interactive drawing tools. The platform is designed to support **real-time collaboration** with features such as **room creation, user management, and an interactive canvas** with essential drawing tools.  
 
 The project is built using the **MERN stack**, ensuring a **fast, scalable, and real-time** experience. **WebSockets (Socket.io)** enable instant updates, making collaboration seamless.  
